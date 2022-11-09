@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from 'react';
 import Icons from '../../../components/Icons';
 import {
   StyledIconWrapper,
@@ -6,16 +7,32 @@ import {
 } from './SearchResultList.style';
 
 interface SearchResultProps {
+  result: SearchDataProps;
+  setSearchQuery: Dispatch<SetStateAction<string>>;
+}
+
+interface SearchDataProps {
+  id: number;
+  fullname: string;
   matchSickName: string;
   sickName: string;
 }
 
 export default function SearchResultItem({
-  matchSickName,
-  sickName,
+  result,
+  setSearchQuery,
 }: SearchResultProps) {
+  const { fullname, matchSickName, sickName } = result;
+
+  const handleMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
+  };
+
   return (
-    <StyledResultColumn>
+    <StyledResultColumn
+      onClick={() => setSearchQuery(fullname)}
+      onMouseDown={handleMouseDown}
+    >
       <StyledIconWrapper>
         <Icons.Search />
       </StyledIconWrapper>

@@ -7,6 +7,7 @@ const { createStandardAction } = deprecated;
 export const GET_SEARCH_RESULTS = 'search/GET_SEARCH_RESULTS';
 export const GET_SEARCH_RESULTS_SUCCESS = 'search/GET_SEARCH_RESULTS_SUCCESS';
 export const GET_SEARCH_RESULTS_ERROR = 'search/GET_SEARCH_RESULTS_ERROR';
+export const DELETE_SEARCH_RESULTS = 'search/DELETE_SEARCH_RESULTS';
 
 export const getSearchResults = createStandardAction(GET_SEARCH_RESULTS)();
 export const getSearchResultsSuccess = createStandardAction(
@@ -15,3 +16,6 @@ export const getSearchResultsSuccess = createStandardAction(
 export const getSearchResultsError = createStandardAction(
   GET_SEARCH_RESULTS_ERROR,
 )<AxiosError>();
+export const deleteSearchResults = createStandardAction(
+  DELETE_SEARCH_RESULTS,
+)();

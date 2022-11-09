@@ -4,6 +4,7 @@ import {
   GET_SEARCH_RESULTS,
   GET_SEARCH_RESULTS_SUCCESS,
   GET_SEARCH_RESULTS_ERROR,
+  DELETE_SEARCH_RESULTS,
 } from './actions';
 
 const initialState: SearchResultState = {
@@ -36,6 +37,14 @@ const search = createReducer<SearchResultState, SearchAction>(initialState, {
     searchData: {
       loading: false,
       error: action.payload,
+      data: null,
+    },
+  }),
+  [DELETE_SEARCH_RESULTS]: (state) => ({
+    ...state,
+    searchData: {
+      loading: false,
+      error: null,
       data: null,
     },
   }),

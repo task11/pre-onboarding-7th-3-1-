@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import {
   StyledButton,
@@ -16,6 +16,7 @@ import Icons from '../../../components/Icons';
 import useToggleFocus from '../hooks/useToggleFocus';
 import useSearchQuery from '../hooks/useSearchQuery';
 import SearchResultList from './SearchResultList';
+import useGetSearchData from '../hooks/useGetSearchData';
 
 export default function SearchInput() {
   const { isSearching, inputWrapRef, inputBlurHandler, inputFocusHandler } =
@@ -30,10 +31,16 @@ export default function SearchInput() {
     setSearchQuery,
   } = useSearchQuery('');
 
+  const { searchData, initDataList } = useGetSearchData();
+
   const isSearchActive = useMemo(
     () => !searchQuery.length && !isSearching,
     [isSearching, searchQuery.length],
   );
+
+  useEffect(() => {
+    initDataList(searchQuery);
+  }, [searchQuery]);
 
   return (
     <StyledSearchInputWrapper>
@@ -90,6 +97,7 @@ export default function SearchInput() {
         {isSearching && (
           <SearchResultList
             searchQuery={searchQuery}
+            searchData={searchData}
             setSearchQuery={setSearchQuery}
           />
         )}

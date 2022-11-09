@@ -1,28 +1,23 @@
 import { Dispatch, SetStateAction } from 'react';
 import Icons from '../../../components/Icons';
+import { SearchResultDataProps } from '../../../types/search';
 import {
   StyledIconWrapper,
-  StyledMatchWord,
   StyledResultColumn,
 } from './SearchResultList.style';
 
 interface SearchResultProps {
-  result: SearchDataProps;
+  result: SearchResultDataProps;
+  searchQuery: string;
   setSearchQuery: Dispatch<SetStateAction<string>>;
-}
-
-interface SearchDataProps {
-  id: number;
-  fullname: string;
-  matchSickName: string;
-  sickName: string;
 }
 
 export default function SearchResultItem({
   result,
+  searchQuery,
   setSearchQuery,
 }: SearchResultProps) {
-  const { fullname, matchSickName, sickName } = result;
+  const { sickNm } = result;
 
   const handleMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -30,14 +25,21 @@ export default function SearchResultItem({
 
   return (
     <StyledResultColumn
-      onClick={() => setSearchQuery(fullname)}
+      onClick={() => setSearchQuery(sickNm)}
       onMouseDown={handleMouseDown}
     >
       <StyledIconWrapper>
         <Icons.Search />
       </StyledIconWrapper>
-      <StyledMatchWord>{matchSickName}</StyledMatchWord>
-      {sickName}
+      {sickNm.includes(searchQuery) ? (
+        <>
+          {sickNm.split(searchQuery)[0]}
+          <span style={{ fontWeight: 'bold' }}>{searchQuery}</span>
+          {sickNm.split(searchQuery)[1]}
+        </>
+      ) : (
+        sickNm
+      )}
     </StyledResultColumn>
   );
 }

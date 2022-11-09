@@ -21,6 +21,8 @@ export const StyledResultWrapper = styled.div`
   flex-direction: column;
   display: flex;
   width: 100%;
+  max-height: 400px;
+  overflow-y: scroll;
   position: absolute;
   top: 100%;
   left: 0px;
@@ -39,6 +41,14 @@ export const StyledResultWrapper = styled.div`
     padding-right: 24px;
     font-family: inherit;
   }
+`;
+
+export const StlyedWithoutResult = styled.div`
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const StyledResultColumn = styled.div`

@@ -4,12 +4,14 @@ import {
   getSearchResults,
   getSearchResultsSuccess,
   getSearchResultsError,
+  deleteSearchResults,
 } from './actions';
 
 const actions = {
   getSearchResults,
   getSearchResultsSuccess,
   getSearchResultsError,
+  deleteSearchResults,
 };
 export type SearchAction = ActionType<typeof actions>;
 

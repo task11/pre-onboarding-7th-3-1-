@@ -16,7 +16,7 @@ import Icons from '../../../components/Icons';
 import useToggleFocus from '../hooks/useToggleFocus';
 import useSearchQuery from '../hooks/useSearchQuery';
 import SearchResultList from './SearchResultList';
-import useGetConvertData from '../hooks/useGetConvertData';
+import useGetSearchData from '../hooks/useGetSearchData';
 
 export default function SearchInput() {
   const { isSearching, inputWrapRef, inputBlurHandler, inputFocusHandler } =
@@ -31,7 +31,7 @@ export default function SearchInput() {
     setSearchQuery,
   } = useSearchQuery('');
 
-  const { convertDataList, initDataList } = useGetConvertData([]);
+  const { searchData, initDataList } = useGetSearchData();
 
   const isSearchActive = useMemo(
     () => !searchQuery.length && !isSearching,
@@ -97,7 +97,7 @@ export default function SearchInput() {
         {isSearching && (
           <SearchResultList
             searchQuery={searchQuery}
-            convertDataList={convertDataList}
+            searchData={searchData}
             setSearchQuery={setSearchQuery}
           />
         )}

@@ -2,9 +2,9 @@ import { Dispatch, SetStateAction } from 'react';
 
 import Icons from '../../../components/Icons';
 import {
-  ConvertSearchDataListProps,
-  ConvertSearchDataProps,
-} from '../../../types/convertSearchData';
+  SearchResultDataListProps,
+  SearchResultDataProps,
+} from '../../../types/search';
 
 import SearchResultItem from './SearchResultItem';
 
@@ -18,13 +18,13 @@ import {
 } from './SearchResultList.style';
 
 interface SearchResultListProps {
-  convertDataList: ConvertSearchDataListProps;
+  searchData: SearchResultDataListProps | null;
   searchQuery: string;
   setSearchQuery: Dispatch<SetStateAction<string>>;
 }
 
 export default function SearchResultList({
-  convertDataList,
+  searchData,
   searchQuery,
   setSearchQuery,
 }: SearchResultListProps) {
@@ -39,17 +39,18 @@ export default function SearchResultList({
             <StyledMatchWord>{searchQuery}</StyledMatchWord>
           </StyledResultColumn>
         )}
-        {!convertDataList.length ? (
+        {!searchData?.length ? (
           <StlyedWithoutResult>
             <span>검색 결과가 없습니다.</span>
           </StlyedWithoutResult>
         ) : (
           <>
             <div className="recommend-title">추천 검색어</div>
-            {convertDataList.map((result: ConvertSearchDataProps) => (
+            {searchData.map((result: SearchResultDataProps) => (
               <SearchResultItem
                 key={result.sickCd}
                 result={result}
+                searchQuery={searchQuery}
                 setSearchQuery={setSearchQuery}
               />
             ))}

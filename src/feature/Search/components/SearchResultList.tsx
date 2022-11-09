@@ -1,10 +1,15 @@
 import { Dispatch, SetStateAction } from 'react';
-import { useSelector } from 'react-redux';
+
 import Icons from '../../../components/Icons';
-import { RootState } from '../../../redux/create';
+import {
+  ConvertSearchDataListProps,
+  ConvertSearchDataProps,
+} from '../../../types/convertSearchData';
+
 import SearchResultItem from './SearchResultItem';
 
 import {
+  StlyedWithoutResult,
   StyledIconWrapper,
   StyledMatchWord,
   StyledResultColumn,
@@ -12,48 +17,17 @@ import {
   StyledSearchResultList,
 } from './SearchResultList.style';
 
-interface SearchDataProps {
-  id: number;
-  fullname: string;
-  matchSickName: string;
-  sickName: string;
-}
-
-type SearchDataListProps = Array<SearchDataProps>;
-
-const RESULT: SearchDataListProps = [
-  {
-    id: 1,
-    fullname: '임파종대',
-    matchSickName: '임',
-    sickName: '파종대',
-  },
-  {
-    id: 2,
-    fullname: '임질',
-    matchSickName: '임',
-    sickName: '질',
-  },
-  {
-    id: 3,
-    fullname: '임신',
-    matchSickName: '임',
-    sickName: '신',
-  },
-];
-
 interface SearchResultListProps {
+  convertDataList: ConvertSearchDataListProps;
   searchQuery: string;
   setSearchQuery: Dispatch<SetStateAction<string>>;
 }
 
 export default function SearchResultList({
+  convertDataList,
   searchQuery,
   setSearchQuery,
 }: SearchResultListProps) {
-  const searchData = useSelector((state: RootState) => state.search.searchData);
-  console.log(searchData);
-
   return (
     <StyledSearchResultList>
       <StyledResultWrapper>
@@ -65,14 +39,22 @@ export default function SearchResultList({
             <StyledMatchWord>{searchQuery}</StyledMatchWord>
           </StyledResultColumn>
         )}
-        <div className="recommend-title">추천 검색어</div>
-        {RESULT.map((result: SearchDataProps) => (
-          <SearchResultItem
-            key={result.id}
-            result={result}
-            setSearchQuery={setSearchQuery}
-          />
-        ))}
+        {!convertDataList.length ? (
+          <StlyedWithoutResult>
+            <span>검색 결과가 없습니다.</span>
+          </StlyedWithoutResult>
+        ) : (
+          <>
+            <div className="recommend-title">추천 검색어</div>
+            {convertDataList.map((result: ConvertSearchDataProps) => (
+              <SearchResultItem
+                key={result.sickCd}
+                result={result}
+                setSearchQuery={setSearchQuery}
+              />
+            ))}
+          </>
+        )}
       </StyledResultWrapper>
     </StyledSearchResultList>
   );

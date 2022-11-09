@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 import Icons from '../../../components/Icons';
+import { ConvertSearchDataProps } from '../../../types/convertSearchData';
 import {
   StyledIconWrapper,
   StyledMatchWord,
@@ -7,22 +8,15 @@ import {
 } from './SearchResultList.style';
 
 interface SearchResultProps {
-  result: SearchDataProps;
+  result: ConvertSearchDataProps;
   setSearchQuery: Dispatch<SetStateAction<string>>;
-}
-
-interface SearchDataProps {
-  id: number;
-  fullname: string;
-  matchSickName: string;
-  sickName: string;
 }
 
 export default function SearchResultItem({
   result,
   setSearchQuery,
 }: SearchResultProps) {
-  const { fullname, matchSickName, sickName } = result;
+  const { fullName, convertName } = result;
 
   const handleMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -30,14 +24,13 @@ export default function SearchResultItem({
 
   return (
     <StyledResultColumn
-      onClick={() => setSearchQuery(fullname)}
+      onClick={() => setSearchQuery(fullName)}
       onMouseDown={handleMouseDown}
     >
       <StyledIconWrapper>
         <Icons.Search />
       </StyledIconWrapper>
-      <StyledMatchWord>{matchSickName}</StyledMatchWord>
-      {sickName}
+      <StyledMatchWord>{convertName}</StyledMatchWord>
     </StyledResultColumn>
   );
 }

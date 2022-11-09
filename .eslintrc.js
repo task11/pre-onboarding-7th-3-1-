@@ -48,5 +48,6 @@ module.exports = {
     'react/no-array-index-key': 'off',
     'import/prefer-default-export': 'off',
     'jsx-a11y/label-has-associated-control': 'off',
+    'no-console': 'off',
   },
 };

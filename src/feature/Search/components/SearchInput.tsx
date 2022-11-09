@@ -27,6 +27,7 @@ export default function SearchInput() {
     handleMouseDown,
     inputClear,
     submitSearch,
+    setSearchQuery,
   } = useSearchQuery('');
 
   const isSearchActive = useMemo(
@@ -86,7 +87,12 @@ export default function SearchInput() {
             <Icons.Search />
           </StyledIcon>
         </StyledButton>
-        {isSearching && <SearchResultList searchQuery={searchQuery} />}
+        {isSearching && (
+          <SearchResultList
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+          />
+        )}
       </StyledInputButtonWrapper>
     </StyledSearchInputWrapper>
   );

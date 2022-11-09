@@ -35,7 +35,7 @@ module.exports = {
     'no-useless-escape': ['error'],
     'linebreak-style': [0, 'error', 'windows'],
     'react/destructuring-assignment': ['error', 'always'],
-    'jsx-quotes': ['error', 'prefer-single'],
+    'jsx-quotes': ['error', 'prefer-double'],
     'switch-colon-spacing': ['error'],
     'key-spacing': ['error', { beforeColon: false, afterColon: true }],
     'react/prop-types': 'off',
@@ -47,9 +47,6 @@ module.exports = {
     'react/jsx-no-useless-fragment': 'off',
     'react/no-array-index-key': 'off',
     'import/prefer-default-export': 'off',
-    'jsx-a11y/label-has-associated-control': [
-      2,
-      { labelAttributes: ['htmlFor'] },
-    ],
+    'jsx-a11y/label-has-associated-control': 'off',
   },
 };

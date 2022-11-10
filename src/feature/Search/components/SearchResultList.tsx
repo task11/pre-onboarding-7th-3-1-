@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, forwardRef, SetStateAction } from 'react';
 
 import Icons from '../../../components/Icons';
 import {
@@ -21,13 +21,15 @@ interface SearchResultListProps {
   searchData: SearchResultDataListProps | null;
   searchQuery: string;
   setSearchQuery: Dispatch<SetStateAction<string>>;
+  index: number;
 }
 
-export default function SearchResultList({
-  searchData,
-  searchQuery,
-  setSearchQuery,
-}: SearchResultListProps) {
+type Ref = HTMLDivElement;
+
+export default forwardRef<Ref, SearchResultListProps>(function SearchResultList(
+  { searchData, searchQuery, setSearchQuery, index },
+  ref,
+) {
   return (
     <StyledSearchResultList>
       <StyledResultWrapper>
@@ -46,17 +48,20 @@ export default function SearchResultList({
         ) : (
           <>
             <div className="recommend-title">추천 검색어</div>
-            {searchData.map((result: SearchResultDataProps) => (
-              <SearchResultItem
-                key={result.sickCd}
-                result={result}
-                searchQuery={searchQuery}
-                setSearchQuery={setSearchQuery}
-              />
-            ))}
+            <div ref={ref}>
+              {searchData.map((result: SearchResultDataProps, idx) => (
+                <SearchResultItem
+                  key={result.sickCd}
+                  result={result}
+                  searchQuery={searchQuery}
+                  setSearchQuery={setSearchQuery}
+                  isFocus={index === idx}
+                />
+              ))}
+            </div>
           </>
         )}
       </StyledResultWrapper>
     </StyledSearchResultList>
   );
-}
+});

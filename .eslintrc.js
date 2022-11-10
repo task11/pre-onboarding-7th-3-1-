@@ -49,5 +49,6 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'jsx-a11y/label-has-associated-control': 'off',
     'no-console': 'off',
+    'jsx-a11y/no-static-element-interactions': 'off',
   },
 };

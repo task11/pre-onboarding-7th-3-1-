@@ -10,23 +10,21 @@ interface SearchResultProps {
   result: SearchResultDataProps;
   searchQuery: string;
   setSearchQuery: Dispatch<SetStateAction<string>>;
+  isFocus: boolean;
 }
 
 export default function SearchResultItem({
   result,
   searchQuery,
   setSearchQuery,
+  isFocus,
 }: SearchResultProps) {
   const { sickNm } = result;
-
-  const handleMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
-    event.preventDefault();
-  };
 
   return (
     <StyledResultColumn
       onClick={() => setSearchQuery(sickNm)}
-      onMouseDown={handleMouseDown}
+      isFocus={isFocus}
     >
       <StyledIconWrapper>
         <Icons.Search />

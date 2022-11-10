@@ -51,7 +51,7 @@ export const StlyedWithoutResult = styled.div`
   align-items: center;
 `;
 
-export const StyledResultColumn = styled.div`
+export const StyledResultColumn = styled.div<{ isFocus?: boolean }>`
   flex-direction: row;
   align-items: center;
   font-size: 1rem;
@@ -62,6 +62,8 @@ export const StyledResultColumn = styled.div`
   padding: 8px 24px;
   cursor: pointer;
   word-break: break-all;
+
+  background-color: ${(props) => props.isFocus && 'rgb(248, 249, 250)'};
 
   &:hover {
     background: rgb(248, 249, 250);

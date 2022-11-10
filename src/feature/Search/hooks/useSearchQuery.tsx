@@ -30,7 +30,7 @@ export default function useSearchQuery(initialState: string) {
 
   useEffect(() => {
     const debounce = setTimeout(() => {
-      if (!searchQuery) {
+      if (!searchQuery.trim()) {
         return;
       }
       dispatch<ActionType<SearchAction>>(getSearchResultsThunk(searchQuery));

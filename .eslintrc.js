@@ -50,5 +50,6 @@ module.exports = {
     'jsx-a11y/label-has-associated-control': 'off',
     'no-console': 'off',
     'jsx-a11y/no-static-element-interactions': 'off',
+    'no-useless-return': 'off',
   },
 };

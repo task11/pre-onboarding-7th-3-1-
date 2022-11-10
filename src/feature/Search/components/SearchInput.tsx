@@ -18,11 +18,6 @@ import useSearchQuery from '../hooks/useSearchQuery';
 import SearchResultList from './SearchResultList';
 import useGetSearchData from '../hooks/useGetSearchData';
 
-const ArrowDown = 'ArrowDown';
-const ArrowUp = 'ArrowUp';
-const Escape = 'Escape';
-const Enter = 'Enter';
-
 export default function SearchInput() {
   const { isSearching, inputWrapRef, inputBlurHandler, inputFocusHandler } =
     useToggleFocus(false);
@@ -34,45 +29,17 @@ export default function SearchInput() {
     inputClear,
     submitSearch,
     setSearchQuery,
+    resultRef,
+    handleKeyDown,
+    index,
   } = useSearchQuery('');
+
   const { searchData, initDataList } = useGetSearchData();
 
   const isSearchActive = useMemo(
     () => !searchQuery.length && !isSearching,
     [isSearching, searchQuery.length],
   );
-
-  const [index, setIndex] = useState<number>(-1);
-  const resultRef = useRef<HTMLDivElement>(null);
-
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (searchQuery.length > 0) {
-      switch (event.key) {
-        case ArrowDown:
-          setIndex(index + 1);
-          if (resultRef.current?.childElementCount === index + 1) setIndex(0);
-          break;
-        case ArrowUp:
-          setIndex(index - 1);
-          if (index <= 0) {
-            setIndex(0);
-          }
-          break;
-        case Escape:
-          setIndex(-1);
-          break;
-        case Enter:
-          setSearchQuery(
-            resultRef.current?.childNodes[index]?.textContent || '',
-          );
-          setIndex(-1);
-          break;
-        default:
-          setIndex(-1);
-          break;
-      }
-    }
-  };
 
   useEffect(() => {
     initDataList(searchQuery);

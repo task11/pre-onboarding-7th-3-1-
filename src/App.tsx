@@ -1,7 +1,7 @@
 import { ThemeProvider } from 'styled-components';
 
 import { Provider } from 'react-redux';
-import { applyMiddleware, createStore } from 'redux';
+import { applyMiddleware, legacy_createStore as createStore } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './redux/create';
 
